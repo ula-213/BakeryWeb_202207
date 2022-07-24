@@ -1,16 +1,21 @@
 ﻿@model WebApplication1.ViewModel.ItemViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "CatalogItem";
 }
+
+<div class="catalogLabel">
+    <span class="glyphicon glyphicon-cutlery"></span>&nbsp;@ViewData["CatalogLabel"]
+    <hr />
+</div>
 
 <div class="wrapper grid">
     @if (!Model.IdList.Count.Equals(0))
-    {      
+    {
         for (int i = 0; i < Model.IdList.Count; i++)
-        {              
-                @Html.Partial("ItemBlock", Model.ItemBlock[i])
-        }                    
+        {
+            @Html.Partial("ItemBlock", Model.ItemBlock[i])
+        }
     }
     else
     {
@@ -22,3 +27,4 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+

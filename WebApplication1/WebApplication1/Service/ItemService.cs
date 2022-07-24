@@ -68,6 +68,33 @@ namespace WebApplication1.Service
             return IdList;
         }
         #endregion
+        #region 取得商品分類編號陣列
+        public List<int> GetIdListByCatalog(ForPaging Paging, int Catalog)
+        {
+            SetMaxPaging(Paging);
+            List<int> IdList = new List<int>();
+            string sql = $@"SELECT Id FROM (SELECT ROW_NUMBER() OVER (ORDER BY Id DESC) as sort, * FROM Product where Catalog = {Catalog}) m WHERE m.sort BETWEEN  {(Paging.NowPage - 1) * Paging.ItemNum + 1} AND {Paging.NowPage * Paging.ItemNum}";
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    IdList.Add(Convert.ToInt32(dr["Id"]));
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return IdList;
+        }
+        #endregion
         #region 設定最大頁數
         public void SetMaxPaging(ForPaging Paging)
         {
@@ -140,5 +167,6 @@ namespace WebApplication1.Service
             return Id + 1;
         }
         #endregion
+       
     }
 }

@@ -19,13 +19,13 @@
                     <span class="icon-bar"></span>
                 </button>
                 
-                @Html.ActionLink("麵包店", "Index", "ImgCarousel", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("茗坊麵包店", "Index", "ImgCarousel", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse navbar-collapse-center">
                 <ul class="nav navbar-nav navbar-center">
-                    <li>@Html.ActionLink("麵包系列", "Index", "Home")</li>
-                    <li>@Html.ActionLink("西點系列", "About", "Home")</li>
-                    <li>@Html.ActionLink("喜餅系列", "Contact", "Home")</li>
+                    <li><a href="@Url.Action("CatalogItem", "Item", new { Catalog = 1})">麵包系列</a></li>
+                    <li><a href="@Url.Action("CatalogItem", "Item", new { Catalog = 2})">西點系列</a></li>
+                    <li><a href="@Url.Action("CatalogItem", "Item", new { Catalog = 3})">喜餅系列</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <!--已登入-->

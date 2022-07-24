@@ -29,5 +29,10 @@ namespace WebApplication1.Models
         [Required(ErrorMessage = "請輸入商品描述")]
         [StringLength(500, ErrorMessage = "商品描述不可大於500字元")]
         public string Description { get; set; }
+
+        [DisplayName("類別")]
+        [Required(ErrorMessage ="請選擇商品類別")]
+        public int Catalog { get; set; }
+
     }
 }

@@ -204,6 +204,7 @@
     <Content Include="Views\Members\ChangePassword.cshtml" />
     <Content Include="Views\ImgCarousel\Index.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Item\CatalogItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

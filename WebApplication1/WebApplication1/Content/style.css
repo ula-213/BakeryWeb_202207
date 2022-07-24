@@ -200,3 +200,10 @@ a:hover {
     height: 100vh;
     background-attachment:fixed;
 }
+
+.catalogLabel {
+    font-size: 20px;
+    color: #f59d23;
+    text-align:center;
+    margin-top:50px;
+}

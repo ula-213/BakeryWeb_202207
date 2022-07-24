@@ -85,5 +85,38 @@ namespace WebApplication1.Controllers
             }
         }
         #endregion
+        #region 商品類別
+        public ActionResult CatalogItem(int Page = 1, int Catalog = 1)
+        {
+            ItemViewModel Data = new ItemViewModel();
+            Data.Paging = new ForPaging(Page);
+            Data.IdList = itemService.GetIdListByCatalog(Data.Paging, Catalog);
+            Data.ItemBlock = new List<ItemDetailViewModel>();
+            foreach (var Id in Data.IdList)
+            {
+                ItemDetailViewModel newBlock = new ItemDetailViewModel();
+                newBlock.Data = itemService.GetDataById(Id);
+                //取得session內購物車資料
+                //string Cart = (HttpContext.Session["Cart"] != null) ? HttpContext.Session["Cart"].ToString() : null;
+                //newBlock.InCart = cartService.CheckInCart(Cart, Id);
+                Data.ItemBlock.Add(newBlock);
+            }
+            if (Catalog == 1)
+            {
+                ViewData["CatalogLabel"] = "麵包系列";
+            }
+            else if(Catalog == 2)
+            {
+                ViewData["CatalogLabel"] = "西點系列";
+            }
+            else if(Catalog == 3)
+            {
+                ViewData["CatalogLabel"] = "喜餅系列";
+            }
+            
+            return View(Data);
+
+        }
+        #endregion
     }
 }
