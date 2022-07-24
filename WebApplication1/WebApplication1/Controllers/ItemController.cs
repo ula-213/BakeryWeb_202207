@@ -67,7 +67,7 @@ namespace WebApplication1.Controllers
             {
                 new SelectListItem() { Text="麵包系列", Value="1"},
                 new SelectListItem() { Text = "蛋糕系列", Value="2"},
-                new SelectListItem() {Text="喜餅系列", Value="3"}
+                new SelectListItem() {Text="餅乾系列", Value="3"}
             };
             productCatalogDropdownList.Where(q => q.Value == "1").First().Selected = true;
             ViewBag.selectList = productCatalogDropdownList;
@@ -119,7 +119,7 @@ namespace WebApplication1.Controllers
             }
             else if(Catalog == 3)
             {
-                ViewData["CatalogLabel"] = "喜餅系列";
+                ViewData["CatalogLabel"] = "餅乾系列";
             }
             
             return View(Data);

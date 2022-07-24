@@ -133,6 +133,16 @@ a:hover {
     margin: 0 auto;
     padding: 0 4%;
 }
+.wrapper_01 {
+    max-width: 1500px;
+    margin-top: 50px;
+}
+.wrapper_01 .thumbnail{
+    float:left;
+}
+.wrapper_01 .thumbnail img:hover {
+    filter: none;
+}
 
 .grid {
     display: grid;
@@ -207,3 +217,5 @@ a:hover {
     text-align:center;
     margin-top:50px;
 }
+
+

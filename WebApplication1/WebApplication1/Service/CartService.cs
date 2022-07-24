@@ -138,9 +138,9 @@ namespace WebApplication1.Service
         }
         #endregion
         #region 將商品放入購物車
-        public void AddtoCart(string Cart, int Item_Id, int qty)
+        public void AddtoCart(string Cart, int Item_Id)
         {
-            string sql = $@"Insert into CartBuy(Cart_Id, Item_Id, Quantity) values ('{Cart}', {Item_Id}, {qty})";
+            string sql = $@"Insert into CartBuy(Cart_Id, Item_Id) values ('{Cart}', {Item_Id})";
             try
             {
                 conn.Open();
