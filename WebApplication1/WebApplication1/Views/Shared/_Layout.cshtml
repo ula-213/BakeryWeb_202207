@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>茗坊麵包店</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/style.css" /> 
+</head>
+<body class="bg_img">
+    <div class="  navbar-fixed-top bg_white">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                @Html.ActionLink("麵包店", "Index", "ImgCarousel", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse navbar-collapse-center">
+                <ul class="nav navbar-nav navbar-center">
+                    <li>@Html.ActionLink("麵包系列", "Index", "Home")</li>
+                    <li>@Html.ActionLink("西點系列", "About", "Home")</li>
+                    <li>@Html.ActionLink("喜餅系列", "Contact", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!--已登入-->
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="" class="glyphicon glyphicon-search"></a></li>
+                        <li><a href="@Url.Action("Index", "Cart")" class="glyphicon glyphicon-shopping-cart"></a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle navbar-link" href="#" role="button" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">                               
+                                <span class="glyphicon glyphicon-user"></span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a href="#">會員資料</a></li>
+                                <li><a href="@Url.Action("ChangePassword", "Members")">修改密碼</a></li>
+                                @if (User.IsInRole("Admin")) {
+                                    <li><a href="@Url.Action("Create", "Item")">商品管理</a></li>
+                                }
+                                
+                                <li role="separator" class="divider"></li>
+                                <li><a href="@Url.Action("Logout", "Members")">登出</a></li>
+
+
+                            </ul>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li><a href="" class="glyphicon glyphicon-search"></a></li>
+                        <li>@Html.ActionLink("註冊/登入", "Login", "Members")</li>
+                    }
+                </ul>
+            </div>
+            
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()       
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

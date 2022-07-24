@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "EmailValidate";
+}
+
+<div class="bg-3">
+    <div class="header_1">
+        <div class="form-horizontal block_1">
+            <h2 class="title_1">Email驗證</h2>
+            <hr>
+            <div class="alert alert-success text-center">
+                @ViewData["EmailValidate"]
+            </div>
+            <div class="text-center">
+                @Html.ActionLink("登入", "Login")&nbsp;
+                @Html.ActionLink("再註冊", "Register")
+            </div>
+
+        </div>
+    </div>
+</div>

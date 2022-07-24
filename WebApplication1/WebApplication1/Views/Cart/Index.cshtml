@@ -1,0 +1,67 @@
+﻿@model WebApplication1.ViewModel.CartBuyViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="page-header">
+    <h3>購物車</h3>
+</div>
+<div class="table-responsive">
+    <table class="table table-hover">
+        @if (!Model.DataList.Equals(0))
+        {
+            <thead>
+                <tr>
+                    <th class="text-center">@Html.DisplayNameFor(p => p.DataList[0].Item.Image)</th>
+                    <th class="text-center">@Html.DisplayNameFor(p => p.DataList[0].Item.Name)</th>
+                    <th class="text-center">@Html.DisplayNameFor(p => p.DataList[0].Item.Price)</th>
+                </tr>
+            </thead>
+            foreach (var item in Model.DataList)
+            {
+                <tr>
+                    <td class="text-center product-img">
+                        <a href="@Url.Action("Item", "Item", new { Id = item.Item.Id }, null)">
+                            <img src="@Html.Encode(Url.Content("~/images/Product/" + item.Item.Image))" alt="">
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink(item.Item.Name, "Item", "Item", new { Id = item.Item.Id }, null)
+                    </td>
+                    <td class="text-center">@item.Item.Price</td>
+                    <td class="text-center">
+                        @Html.ActionLink("移除", "Pop", new { Id = item.Item.Id, toPage = "Cart" }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>購物車內無商品</td>
+            </tr>
+        }
+    </table>
+</div>
+
+@if (Model.isCartSave)
+{
+    <div class="text-center">
+        <text>購物車已保存，請按此</text>
+        @Html.ActionLink("取消", "CartSaveRemove", null, new { @class = "btn btn-danger" })
+    </div>
+    
+}
+else
+{
+    <div class="text-center">
+        <text>購物車上為保存，請按此</text>
+        @Html.ActionLink("保存", "CartSave", null, new { @class = "btn btn-warning" })
+    </div>
+    
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

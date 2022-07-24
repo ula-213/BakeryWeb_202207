@@ -1,0 +1,65 @@
+﻿@model WebApplication1.ViewModel.RegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="form">
+        <ul class="tab-group">
+            <li class="tab active">
+                <a href="@Url.Action("Register", "Members")">註冊</a>
+            </li>
+            <li class="tab">
+                <a href="@Url.Action("Login", "Members")">登入</a>
+            </li>
+        </ul>
+        <!--<div class="alert alert-warning">
+            @Html.ValidationSummary()
+        </div>-->
+
+        @using (Html.BeginForm("Register", "Members", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            //帳號
+            <div class="form-group">
+                @Html.LabelFor(model => model.Member.Account, new { @class = "label_01" })
+                @Html.TextBoxFor(model => model.Member.Account, new { @class = "form-control", placeholder = "輸入帳號" })
+                @Html.ValidationMessageFor(model => model.Member.Account, null, new { @class = "label label-danger" })
+            </div>
+            //密碼
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, new { @class = "label_01" })
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "輸入密碼" })
+                @Html.ValidationMessageFor(model => model.Password, null, new { @class = "label label-danger" })
+            </div>
+            //密碼確認
+            <div class="form-group">
+                @Html.LabelFor(model => model.PasswordCheck, new { @class = "label_01" })
+                @Html.PasswordFor(model => model.PasswordCheck, new { @class = "form-control", placeholder = "輸入確認密碼" })
+                @Html.ValidationMessageFor(model => model.PasswordCheck, null, new { @class = "label label-danger" })
+            </div>
+            //姓名
+            <div class="form-group">
+                @Html.LabelFor(model => model.Member.Name, new { @class = "label_01" })
+                @Html.TextBoxFor(model => model.Member.Name, new { @class = "form-control", placeholder = "輸入姓名" })
+                @Html.ValidationMessageFor(model => model.Member.Name, null, new { @class = "label label-danger" })
+            </div>
+            //Email
+            <div class="form-group">
+                @Html.LabelFor(model => model.Member.Email, new { @class = "label_01" })
+                @Html.TextBoxFor(model => model.Member.Email, new { @class = "form-control", placeholder = "輸入Email" })
+                @Html.ValidationMessageFor(model => model.Member.Email, null, new { @class = "label label-danger" })
+            </div>
+            //繳交
+            <div class="form-group" style="margin-top:50px;">
+                <input class="btn_01" type="submit" value="註冊" />
+            </div>
+
+        }
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

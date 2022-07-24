@@ -1,0 +1,46 @@
+﻿@model WebApplication1.ViewModel.ItemDetailViewModel
+
+@{
+    ViewBag.Title = "Item";
+}
+
+
+
+<div class="container_1">
+    <img class="col-md-4 col-sm-8" src="@Html.Encode(Url.Content("~/images/Product/" + Model.Data.Image))">
+
+    <div class="item_info col-md-4 col-sm-8">
+
+        <h2>@Html.DisplayTextFor(model => model.Data.Name) </h2>
+        <div class="border">
+            文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明
+            文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明文字說明
+        </div>
+        <div class="border_2 col-sm-8">
+            <span style="font-size:26px">$@Html.DisplayTextFor(model => model.Data.Price)</span>
+            <div>
+
+                <span style="float:right;">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("放入購物車", "Put", "Cart", new { Id = Model.Data.Id, toPage = "Item"}, new { @class = "btn btn-warning" })
+                       
+                    }
+                    else
+                    {
+                        <text>欲使用購物車請先</text>
+                        @Html.ActionLink("登入", "Login", "Members")
+                    }
+                </span>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

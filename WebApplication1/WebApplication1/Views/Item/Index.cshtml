@@ -1,0 +1,24 @@
+﻿@model WebApplication1.ViewModel.ItemViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="wrapper grid">
+    @if (!Model.IdList.Count.Equals(0))
+    {      
+        for (int i = 0; i < Model.IdList.Count; i++)
+        {              
+                @Html.Partial("ItemBlock", Model.ItemBlock[i])
+        }                    
+    }
+    else
+    {
+        <tr>無商品</tr>
+    }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

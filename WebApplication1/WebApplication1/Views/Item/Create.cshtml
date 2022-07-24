@@ -1,0 +1,57 @@
+﻿@model WebApplication1.ViewModel.ItemCreateViewModel
+
+@{
+    ViewBag.Title = "新增商品";
+}
+
+
+
+@using (Html.BeginForm("Add", "Item", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form">
+        <ul class="tab-group">
+            <li class="tab active">
+                <a href="@Url.Action("Add", "Item")">新增商品</a>
+            </li>
+            <li class="tab">
+                <a href="@Url.Action("Add", "Item")">商品編輯</a>
+            </li>
+        </ul>
+
+
+        <!--商品名稱-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewData.Name, new { @class = "label_01" })
+            @Html.TextBoxFor(model => model.NewData.Name, new { @class = "form-control", placeholder = "輸入商品名稱" })
+            @Html.ValidationMessageFor(model => model.NewData.Name, null, new { @class = "label label-danger" })
+        </div>
+        <!--價格-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewData.Price, new { @class = "label_01" })
+            @Html.TextBoxFor(model => model.NewData.Price, new { @class = "form-control", placeholder = "輸入價格" })
+            @Html.ValidationMessageFor(model => model.NewData.Price, null, new { @class = "label label-danger" })
+        </div>
+        <!--圖片-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.ItemImage, new { @class = "label_01" })
+            @Html.TextBoxFor(model => model.ItemImage, new { @class = "form-control", placeholder = "上傳圖檔", type = "file" })
+            <div style="color:red">*圖檔大小為620*460</div>
+                @Html.ValidationMessageFor(model => model.ItemImage, null, new { @class = "label label-danger" })
+            </div>
+        <!--描述-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewData.Description, new { @class = "label_01"  })
+            @Html.TextAreaFor(model => model.NewData.Description, new { @class = "form-control_01", placeholder = "輸入小於500字的商品描述" })
+            @Html.ValidationMessageFor(model => model.NewData.Description, null, new { @class = "label label-danger" })
+        </div>
+        <!--繳交-->
+        <div class="form-group" style="margin-top:50px;">
+            <input class="btn_01" type="submit" value="上傳商品" />
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
