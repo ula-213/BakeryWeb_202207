@@ -126,7 +126,7 @@ namespace WebApplication1.Service
         public void Insert(Item NewData)
         {
             NewData.Id = LastItemFinder();
-            string sql = $@"insert into Product(Id, Name, Price, Image, Description) values({NewData.Id}, '{NewData.Name}', {NewData.Price}, '{NewData.Image}', '{NewData.Description}');";
+            string sql = $@"insert into Product(Id, Name, Price, Image, Description, Catalog) values({NewData.Id}, '{NewData.Name}', {NewData.Price}, '{NewData.Image}', '{NewData.Description}', {NewData.Catalog});";
             try
             {
                 conn.Open();

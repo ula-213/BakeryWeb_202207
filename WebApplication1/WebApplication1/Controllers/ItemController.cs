@@ -63,6 +63,14 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
+            var productCatalogDropdownList = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="麵包系列", Value="1"},
+                new SelectListItem() { Text = "蛋糕系列", Value="2"},
+                new SelectListItem() {Text="喜餅系列", Value="3"}
+            };
+            productCatalogDropdownList.Where(q => q.Value == "1").First().Selected = true;
+            ViewBag.selectList = productCatalogDropdownList;
             return View();
         }
         [Authorize(Roles = "Admin")]
@@ -76,7 +84,7 @@ namespace WebApplication1.Controllers
                 Data.ItemImage.SaveAs(url);
                 Data.NewData.Image = fileName;
                 itemService.Insert(Data.NewData);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Create", "Item");
             }
             else
             {

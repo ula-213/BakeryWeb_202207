@@ -31,13 +31,19 @@
             @Html.TextBoxFor(model => model.NewData.Price, new { @class = "form-control", placeholder = "輸入價格" })
             @Html.ValidationMessageFor(model => model.NewData.Price, null, new { @class = "label label-danger" })
         </div>
+        <!--類別-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewData.Catalog, new { @class = "label_01" })
+            @Html.DropDownListFor(model => model.NewData.Catalog, (IEnumerable<SelectListItem>)ViewBag.selectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.NewData.Catalog, null, new { @class = "label label-danger" })
+        </div>
         <!--圖片-->
         <div class="form-group">
             @Html.LabelFor(model => model.ItemImage, new { @class = "label_01" })
             @Html.TextBoxFor(model => model.ItemImage, new { @class = "form-control", placeholder = "上傳圖檔", type = "file" })
             <div style="color:red">*圖檔大小為620*460</div>
                 @Html.ValidationMessageFor(model => model.ItemImage, null, new { @class = "label label-danger" })
-            </div>
+        </div>
         <!--描述-->
         <div class="form-group">
             @Html.LabelFor(model => model.NewData.Description, new { @class = "label_01"  })
