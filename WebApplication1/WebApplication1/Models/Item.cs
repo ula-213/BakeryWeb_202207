@@ -35,5 +35,7 @@ namespace WebApplication1.Models
         [Required(ErrorMessage ="請選擇商品類別")]
         public int Catalog { get; set; }
 
+        public CartBuy cart { get; set; }
+
     }
 }

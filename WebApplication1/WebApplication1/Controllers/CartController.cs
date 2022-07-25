@@ -23,7 +23,7 @@ namespace WebApplication1.Controllers
         }
         #region 將商品放入購物車
         [Authorize]
-        public ActionResult Put(int Id, string ToPage)
+        public ActionResult Put(int Id, string ToPage, int qty)
         {
             if(HttpContext.Session["Cart"] == null)
             {
@@ -33,10 +33,20 @@ namespace WebApplication1.Controllers
 
                 HttpContext.Session["Cart"] = User.Identity.Name + strTime;
             }
-            cartService.AddtoCart(HttpContext.Session["Cart"].ToString(), Id);
+
+            //如果購物車內有同種類商品
+            if (cartService.CheckCartItem(HttpContext.Session["Cart"].ToString(), Id))
+            {
+                cartService.UpdateQuantityFromCart(HttpContext.Session["Cart"].ToString(), Id, qty);
+            }
+            else
+            {
+                cartService.AddtoCart(HttpContext.Session["Cart"].ToString(), Id, qty);
+            }
+            
             if (ToPage == "Item")
             {
-                return RedirectToAction("Item", "Item", new { Id = Id });
+                return RedirectToAction("Index", "Item");
             }
             else if(ToPage == "ItemBlock")
             {

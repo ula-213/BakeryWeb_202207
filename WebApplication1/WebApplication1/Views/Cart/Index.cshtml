@@ -16,6 +16,7 @@
                     <th class="text-center">@Html.DisplayNameFor(p => p.DataList[0].Item.Image)</th>
                     <th class="text-center">@Html.DisplayNameFor(p => p.DataList[0].Item.Name)</th>
                     <th class="text-center">@Html.DisplayNameFor(p => p.DataList[0].Item.Price)</th>
+                    <th class="text-center">@Html.DisplayNameFor(p => p.DataList[0].Quantity)</th>
                 </tr>
             </thead>
             foreach (var item in Model.DataList)
@@ -30,6 +31,7 @@
                         @Html.ActionLink(item.Item.Name, "Item", "Item", new { Id = item.Item.Id }, null)
                     </td>
                     <td class="text-center">@item.Item.Price</td>
+                    <td class="text-center">@item.Quantity</td>
                     <td class="text-center">
                         @Html.ActionLink("移除", "Pop", new { Id = item.Item.Id, toPage = "Cart" }, new { @class = "btn btn-danger" })
                     </td>

@@ -37,14 +37,7 @@ namespace WebApplication1.Controllers
             ItemDetailViewModel ViewData = new ItemDetailViewModel();
             ViewData.Data = itemService.GetDataById(Id);
             string Cart = (HttpContext.Session["Cart"] != null) ? HttpContext.Session["Cart"].ToString() : null;
-            /*if (cartService.CheckCartItem(HttpContext.Session["Cart"].ToString(), Id))
-            {
-                cartService.UpdateQuantityFromCart(HttpContext.Session["Cart"].ToString(), Id, Quantity);
-            }
-            else
-            {
-                cartService.AddtoCart(HttpContext.Session["Cart"].ToString(), Id, Quantity);
-            }*/
+           
             return View(ViewData);
 
         }

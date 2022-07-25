@@ -64,6 +64,7 @@ namespace WebApplication1.Service
                     data.Item.Image = dr["Image"].ToString();
                     data.Item.Name = dr["Name"].ToString();
                     data.Item.Price = Convert.ToInt32(dr["Price"]);
+                    data.Quantity = Convert.ToInt32(dr["Quantity"]);
                     datalist.Add(data);
                 }
             }
@@ -105,9 +106,9 @@ namespace WebApplication1.Service
         }
         #endregion
         #region 將商品放入購物車
-        public void AddtoCart(string Cart, int Item_Id)
+        public void AddtoCart(string Cart, int Item_Id, int qty)
         {
-            string sql = $@"Insert into CartBuy(Cart_Id, Item_Id) values ('{Cart}', {Item_Id})";
+            string sql = $@"Insert into CartBuy(Cart_Id, Item_Id, Quantity) values ('{Cart}', {Item_Id}, {qty})";
             try
             {
                 conn.Open();
@@ -125,7 +126,54 @@ namespace WebApplication1.Service
             }
         }
         #endregion
+        #region 確認購物車內是否有同種類商品
+        public bool CheckCartItem(string Cart, int Item_Id)
+        {
+            CartBuy data = new CartBuy();
+            string sql = $@"select * from CartBuy Where Cart_Id = '{Cart}' and Item_Id={Item_Id}";
+            try
+            {
 
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                dr.Read();
+                data.Cart_Id = dr["Cart_Id"].ToString();
+                data.Item_Id = Convert.ToInt32(dr["Item_Id"]);
+
+            }
+            catch (Exception e)
+            {
+                data = null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return (data != null);
+        }
+        #endregion
+        #region 將購物車內商品數量更新
+        public void UpdateQuantityFromCart(string Cart, int Item_Id, int num)
+        {
+            string sql = $@"update CartBuy set Quantity = Quantity + {num} where Cart_Id = '{Cart}' and Item_Id = {Item_Id}";
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        
+        #endregion
         #region 將商品取出購物車
         public void RemoveForCart(string Cart, int Item_Id)
         {
