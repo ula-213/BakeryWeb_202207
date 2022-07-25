@@ -32,15 +32,15 @@ namespace WebApplication1.Controllers
                 string strTime = GetNowDateTimeDetail.ToString("yyyy-MM-dd hh:mm:ss.fff");
 
                 HttpContext.Session["Cart"] = User.Identity.Name + strTime;
-            }            
-            
-            if(ToPage == "Item")
+            }
+            cartService.AddtoCart(HttpContext.Session["Cart"].ToString(), Id);
+            if (ToPage == "Item")
             {
                 return RedirectToAction("Item", "Item", new { Id = Id });
             }
             else if(ToPage == "ItemBlock")
             {
-                return RedirectToAction("ItemBlock", "Item", new { Id = Id });
+                return RedirectToAction("Item", "Item", new { Id = Id });
             }
             else
             {

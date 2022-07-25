@@ -104,39 +104,6 @@ namespace WebApplication1.Service
             return (Data != null);
         }
         #endregion
-        #region 確認購物車內是否有同種類商品
-        public bool CheckCartItem(string Cart, int Item_Id)
-        {
-            CartBuy data = new CartBuy();
-            string sql = $@"select * from CartBuy Where Cart_Id = '{Cart}' and Item_Id={Item_Id}";
-            try
-            {
-
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                SqlDataReader dr = cmd.ExecuteReader();
-                dr.Read();
-                data.Cart_Id = dr["Cart_Id"].ToString();
-                data.Item_Id = Convert.ToInt32(dr["Item_Id"]);
-
-            }
-            catch (Exception e)
-            {
-                data = null;
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return (data != null);
-        }
-        #endregion
-        #region 將購物車內商品數量更新
-        public void UpdateQuantityFromCart(string Cart, int Item_Id, int num)
-        {
-            string sql = $@"update CartBuy set Quantity = Quantity + {num} where Cart_Id = '{Cart}' and Item_Id = {Item_Id}";
-        }
-        #endregion
         #region 將商品放入購物車
         public void AddtoCart(string Cart, int Item_Id)
         {
@@ -148,7 +115,7 @@ namespace WebApplication1.Service
                 cmd.ExecuteNonQuery();
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message.ToString());
             }
@@ -158,6 +125,7 @@ namespace WebApplication1.Service
             }
         }
         #endregion
+
         #region 將商品取出購物車
         public void RemoveForCart(string Cart, int Item_Id)
         {
@@ -218,30 +186,7 @@ namespace WebApplication1.Service
             }
         }
         #endregion
-        /*#region 取得商品數量
-        public int GetItemQty(string Cart, int Item_Id)
-        {
-            CartBuy data = new CartBuy();
-            string sql = $@"select Quantity from CartBuy Where Cart_Id = '{Cart}' and Item_Id={Item_Id}";
-            try
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                SqlDataReader dr = cmd.ExecuteReader();
-                dr.Read();
-                data.Quantity = Convert.ToInt32(dr["Quantity"]);
-            }
-            catch(Exception e)
-            {
-                data.Quantity = 0;
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return data.Quantity;
-        }
-        #endregion*/
+        
 
     }
 }
