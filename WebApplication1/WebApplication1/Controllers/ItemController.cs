@@ -68,8 +68,9 @@ namespace WebApplication1.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult Add(ItemCreateViewModel Data)
+        public ActionResult Create(ItemCreateViewModel Data)
         {
+            
             if (Data.ItemImage != null)
             {
                 string fileName = Path.GetFileName(Data.ItemImage.FileName);
@@ -84,6 +85,8 @@ namespace WebApplication1.Controllers
                 ModelState.AddModelError("ItemImage", " 請選擇上傳檔案");
                 return View(Data);
             }
+           
+            
         }
         #endregion
         #region 商品類別

@@ -29,6 +29,7 @@ namespace WebApplication1.Service
                 Data.Image = dr["Image"].ToString();
                 Data.Price = Convert.ToInt32(dr["Price"]);
                 Data.Description = dr["Description"].ToString();
+                Data.Unit = dr["Unit"].ToString();
             }
             catch (Exception e)
             {
@@ -126,7 +127,7 @@ namespace WebApplication1.Service
         public void Insert(Item NewData)
         {
             NewData.Id = LastItemFinder();
-            string sql = $@"insert into Product(Id, Name, Price, Image, Description, Catalog) values({NewData.Id}, '{NewData.Name}', {NewData.Price}, '{NewData.Image}', '{NewData.Description}', {NewData.Catalog});";
+            string sql = $@"insert into Product(Id, Name, Price, Image, Description, Catalog, Unit) values({NewData.Id}, '{NewData.Name}', {NewData.Price}, '{NewData.Image}', '{NewData.Description}', {NewData.Catalog}, '{NewData.Unit}');";
             try
             {
                 conn.Open();

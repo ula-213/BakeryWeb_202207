@@ -9,8 +9,11 @@
     <div class="thumbnail">
         <a href="@Url.Action("Item", "Item", new { Id = Model.Data.Id})"><img src="@Html.Encode(Url.Content("~/images/Product/" + Model.Data.Image))" alt=""></a>
         <div class="caption">
-            <h3 style="text-align:center;">@Html.ActionLink(Model.Data.Name, "Item", new { Id = Model.Data.Id })</h3>
-            <p style="text-align:center;">$@Html.DisplayTextFor(model => model.Data.Price)</p>
+            <h3 style="text-align: center;">@Html.ActionLink(Model.Data.Name, "Item", new { Id = Model.Data.Id })</h3>
+            <p style="text-align:center;">
+                <span style="color: #f59d23; font-size:18px;">$@Html.DisplayTextFor(model => model.Data.Price)</span>
+                <span>/@Html.DisplayTextFor(model => model.Data.Unit)</span>
+            </p>
 
             @if (User.Identity.IsAuthenticated)
             {
@@ -20,13 +23,13 @@
                             @Ajax.ActionLink("放入購物車", "Put", "Cart", new { Id = Model.Data.Id, toPage = "Item", qty = 1 }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ItemBlock-" + Model.Data.Id }, new { @class = "btn btn-warning" })
                         </td>
                         <td style="float:right;">
-                            @Html.ActionLink("商品詳情>>", "Item", "Item", new { Id = Model.Data.Id}, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("商品詳情>>", "Item", "Item", new { Id = Model.Data.Id }, new { @class = "btn btn-primary" })
                         </td>
                     </tr>
                 </table>
-                    
+
             }
-            
+
         </div>
     </div>
 </div>

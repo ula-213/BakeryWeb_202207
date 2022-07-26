@@ -34,6 +34,11 @@ namespace WebApplication1.Models
         [DisplayName("類別")]
         [Required(ErrorMessage ="請選擇商品類別")]
         public int Catalog { get; set; }
+        //商品單位
+        [DisplayName("商品單位")]
+        [Required(ErrorMessage ="請輸入商品單位")]
+        [StringLength(50, ErrorMessage = "商品單位不可大於50字元")]
+        public string Unit { get; set; }
 
         public CartBuy cart { get; set; }
 

@@ -5,19 +5,17 @@
 }
 
 
-
-@using (Html.BeginForm("Add", "Item", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <div class="form">
-        <ul class="tab-group">
-            <li class="tab active">
-                <a href="@Url.Action("Add", "Item")">新增商品</a>
-            </li>
-            <li class="tab">
-                <a href="@Url.Action("Add", "Item")">商品編輯</a>
-            </li>
-        </ul>
-
+<div class="form">
+    <ul class="tab-group">
+        <li class="tab active">
+            <a href="@Url.Action("Add", "Item")">新增商品</a>
+        </li>
+        <li class="tab">
+            <a href="@Url.Action("Add", "Item")">商品編輯</a>
+        </li>
+    </ul>
+    @using (Html.BeginForm("Create", "Item", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
 
         <!--商品名稱-->
         <div class="form-group">
@@ -31,6 +29,12 @@
             @Html.TextBoxFor(model => model.NewData.Price, new { @class = "form-control", placeholder = "輸入價格" })
             @Html.ValidationMessageFor(model => model.NewData.Price, null, new { @class = "label label-danger" })
         </div>
+        <!--商品單位-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewData.Unit, new { @class = "label_01" })
+            @Html.TextBoxFor(model => model.NewData.Unit, new { @class = "form-control", placeholder = "例: 1盒、2片、20吋一個" })
+            @Html.ValidationMessageFor(model => model.NewData.Unit, null, new { @class = "label label-danger" })
+        </div>
         <!--類別-->
         <div class="form-group">
             @Html.LabelFor(model => model.NewData.Catalog, new { @class = "label_01" })
@@ -42,22 +46,23 @@
             @Html.LabelFor(model => model.ItemImage, new { @class = "label_01" })
             @Html.TextBoxFor(model => model.ItemImage, new { @class = "form-control", placeholder = "上傳圖檔", type = "file" })
             <div style="color:red">*圖檔大小為620*460</div>
-                @Html.ValidationMessageFor(model => model.ItemImage, null, new { @class = "label label-danger" })
+            @Html.ValidationMessageFor(model => model.ItemImage, null, new { @class = "label label-danger" })
         </div>
         <!--描述-->
         <div class="form-group">
-            @Html.LabelFor(model => model.NewData.Description, new { @class = "label_01"  })
+            @Html.LabelFor(model => model.NewData.Description, new { @class = "label_01" })
             @Html.TextAreaFor(model => model.NewData.Description, new { @class = "form-control_01", placeholder = "輸入小於500字的商品描述" })
             @Html.ValidationMessageFor(model => model.NewData.Description, null, new { @class = "label label-danger" })
         </div>
+        
         <!--繳交-->
         <div class="form-group" style="margin-top:50px;">
             <input class="btn_01" type="submit" value="上傳商品" />
         </div>
 
-    </div>
-}
 
+    }
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

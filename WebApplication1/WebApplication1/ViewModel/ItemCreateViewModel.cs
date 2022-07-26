@@ -12,6 +12,7 @@ namespace WebApplication1.ViewModel
     {
         [DisplayName("商品圖片")]
         [FileExtensions(ErrorMessage = "所上傳檔案非圖檔")]
+        [Required(ErrorMessage ="請上傳商品照片")]
         public HttpPostedFileBase ItemImage { get; set; }
         public Item NewData { get; set; }
     }
