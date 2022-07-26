@@ -9,8 +9,13 @@
 </div>
 <div class="table-responsive">
     <table class="table table-hover">
+        @{
+            int total_price = 0;
+            int qty = 0;
+        }
         @if (!Model.DataList.Equals(0))
         {
+
             <thead>
                 <tr>
                     <th class="text-center">@Html.DisplayNameFor(p => p.DataList[0].Item.Image)</th>
@@ -21,6 +26,11 @@
             </thead>
             foreach (var item in Model.DataList)
             {
+
+
+                total_price += item.Item.Price * item.Quantity;
+                qty += item.Quantity;
+
                 <tr>
                     <td class="text-center product-img">
                         <a href="@Url.Action("Item", "Item", new { Id = item.Item.Id }, null)">
@@ -37,6 +47,20 @@
                     </td>
                 </tr>
             }
+            <tr>
+                <td></td>
+                <td class="text-right" style="font-size: 15px;"><b>總計：</b></td>
+                <td class="text-center" style="font-size: 15px;"><b>$@total_price</b></td>
+                <td class="text-center" style="font-size: 15px;"><b>@qty</b></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="border-top: none;"></td>
+                <td class="text-right" style="font-size: 15px; border-top: none;"><b>應付金額：</b></td>
+                <td class="text-center" style="font-size: 15px; border-top: none;"><b>$@total_price</b></td>
+                <td style="border-top: none;"></td>
+                <td class="text-center" style="border-top: none;">@Html.ActionLink("結帳", "", "", new { @class = "btn btn-warning" }) </td>
+            </tr>
         }
         else
         {
@@ -44,6 +68,7 @@
                 <td>購物車內無商品</td>
             </tr>
         }
+
     </table>
 </div>
 
