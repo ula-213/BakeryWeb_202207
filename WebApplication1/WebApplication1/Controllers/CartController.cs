@@ -12,11 +12,18 @@ namespace WebApplication1.Controllers
     {
         private readonly CartService cartService = new CartService();
         
+        
         [Authorize]
         public ActionResult Index()
-        {
+        {          
+            string Cart = cartService.GetCartSave(User.Identity.Name);
+            if (Cart != null)
+            {
+                HttpContext.Session["Cart"] = Cart;
+            }
+
             CartBuyViewModel data = new CartBuyViewModel();
-            string Cart = (HttpContext.Session["Cart"] != null) ? HttpContext.Session["Cart"].ToString() : null;
+            
             data.DataList = cartService.GetItemFromCart(Cart);
             data.isCartSave = cartService.CheckCartSave(User.Identity.Name, Cart);
             return View(data);
@@ -32,6 +39,11 @@ namespace WebApplication1.Controllers
                 string strTime = GetNowDateTimeDetail.ToString("yyyy-MM-dd hh:mm:ss.fff");
 
                 HttpContext.Session["Cart"] = User.Identity.Name + strTime;
+                if(!cartService.CheckCartSave(User.Identity.Name, HttpContext.Session["Cart"].ToString()))
+                {
+                    cartService.SaveCart(User.Identity.Name, HttpContext.Session["Cart"].ToString());
+
+                }
             }
 
             //如果購物車內有同種類商品
@@ -108,6 +120,30 @@ namespace WebApplication1.Controllers
             cartService.SaveCartRemove(User.Identity.Name);
             return RedirectToAction("Index");
         }
-        #endregion 
+        #endregion
+        #region 結帳
+        [Authorize]
+        public ActionResult Checkout(int Total)
+        {
+            ViewData["Total"] = Total;
+            return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult Checkout(CartBuyViewModel order)
+        {
+            order.Order1.Account = User.Identity.Name;
+            order.Order1.Cart_Id = HttpContext.Session["Cart"].ToString();
+            string validteStr = cartService.GenerateOrder(order);
+            if (validteStr == "訂單完成")
+            {
+                
+                return RedirectToAction("Index", "Item");
+
+            }
+            return View(order);
+
+        }
+        #endregion
     }
 }

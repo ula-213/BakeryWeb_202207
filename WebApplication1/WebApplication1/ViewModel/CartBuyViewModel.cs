@@ -10,5 +10,6 @@ namespace WebApplication1.ViewModel
     {
         public List<CartBuy> DataList { get; set; }
         public bool isCartSave { get; set; }
+        public Order Order1 { get; set; }
     }
 }

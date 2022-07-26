@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using WebApplication1.Models;
+using WebApplication1.ViewModel;
 
 namespace WebApplication1.Service
 {
@@ -15,7 +16,7 @@ namespace WebApplication1.Service
         public string GetCartSave(string Account)
         {
             CartSave Data = new CartSave();
-            string sql = $@"SELECT * FROM CartSave m INNER JOIN Member d on m.Account = d.Account where m.Account='{Account}';";
+            string sql = $@"SELECT * FROM CartSave m INNER JOIN Member d on m.Account = d.Account where m.Account='{Account}' and m.Finished = 'false';";
             try
             {
                 conn.Open();
@@ -234,7 +235,48 @@ namespace WebApplication1.Service
             }
         }
         #endregion
-        
+        #region 產生訂單
+        public string GenerateOrder(CartBuyViewModel Order)
+        {
+            string sql = $@"INSERT INTO Order1(Account, Cart_Id, Adr, PostCode, Name) VALUES ('{Order.Order1.Account}', '{Order.Order1.Cart_Id}', '{Order.Order1.Adr}', {Order.Order1.PostCode}, '{Order.Order1.Name}')";
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return "訂單完成";
+        }
+        #endregion
+        #region 將產生訂單的購物車資料設為finished
+        public void SetCartFinished(string Account, string Cart_Id)
+        {
+            string sql = $@"update CartSave set Finished = 'true' where Account = '{Account}' and Cart_Id = '{Cart_Id}'";
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        #endregion
+
 
     }
 }

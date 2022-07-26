@@ -59,7 +59,7 @@
                 <td class="text-right" style="font-size: 15px; border-top: none;"><b>應付金額：</b></td>
                 <td class="text-center" style="font-size: 15px; border-top: none;"><b>$@total_price</b></td>
                 <td style="border-top: none;"></td>
-                <td class="text-center" style="border-top: none;">@Html.ActionLink("結帳", "", "", new { @class = "btn btn-warning" }) </td>
+                <td class="text-center" style="border-top: none;">@Html.ActionLink("結帳", "Checkout", "Cart", new { Total = total_price }, new { @class = "btn btn-warning" }) </td>
             </tr>
         }
         else
@@ -71,14 +71,15 @@
 
     </table>
 </div>
-
+<!--
+@*
 @if (Model.isCartSave)
 {
     <div class="text-center">
         <text>購物車已保存，請按此</text>
         @Html.ActionLink("取消", "CartSaveRemove", null, new { @class = "btn btn-danger" })
     </div>
-    
+
 }
 else
 {
@@ -86,9 +87,10 @@ else
         <text>購物車上為保存，請按此</text>
         @Html.ActionLink("保存", "CartSave", null, new { @class = "btn btn-warning" })
     </div>
-    
-}
 
+}
+*@
+-->
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
