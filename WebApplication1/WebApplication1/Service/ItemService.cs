@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using WebApplication1.Models;
+using WebApplication1.ViewModel;
 
 namespace WebApplication1.Service
 {
@@ -67,6 +69,40 @@ namespace WebApplication1.Service
                 conn.Close();
             }
             return IdList;
+        }
+        #endregion
+        #region 取得所有商品資料
+        public List<Item> GetAllItem()
+        {
+            
+            List<Item> ItemList = new List<Item>();
+            string sql = $@"select * from Product";
+            try
+            {               
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    //***
+                    Item data = new Item();
+                    data.Id = Convert.ToInt32(dr["Id"]);
+                    data.Name = dr["Name"].ToString();
+                    data.Image = dr["Image"].ToString();
+                    data.Price = Convert.ToInt32(dr["Price"]);
+                    data.Description = dr["Description"].ToString();
+                    ItemList.Add(data);
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ItemList;
         }
         #endregion
         #region 取得商品分類編號陣列
@@ -135,6 +171,28 @@ namespace WebApplication1.Service
                 cmd.ExecuteNonQuery();
             }
             catch (Exception e)
+            {
+                throw new Exception(e.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        #endregion
+        #region 刪除商品
+        public void Delete(int Id)
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine($@"delete from CartBuy where Item_Id = {Id}");
+            sql.AppendLine($@"delete from Product where Id = {Id}");
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql.ToString(), conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch(Exception e)
             {
                 throw new Exception(e.Message.ToString());
             }

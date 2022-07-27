@@ -43,7 +43,7 @@
                                 <li><a href="#">會員資料</a></li>
                                 <li><a href="@Url.Action("ChangePassword", "Members")">修改密碼</a></li>
                                 @if (User.IsInRole("Admin")) {
-                                    <li><a href="@Url.Action("Create", "Item")">商品管理</a></li>
+                                    <li><a href="@Url.Action("Edit", "Item")">商品管理</a></li>
                                 }
                                 
                                 <li role="separator" class="divider"></li>

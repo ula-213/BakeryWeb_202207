@@ -6,14 +6,10 @@
 
 
 <div class="form">
-    <ul class="tab-group">
-        <li class="tab active">
-            <a href="@Url.Action("Add", "Item")">新增商品</a>
-        </li>
-        <li class="tab">
-            <a href="@Url.Action("Add", "Item")">商品編輯</a>
-        </li>
-    </ul>
+    <div class="tab-group" style="font-size: 20px; text-align: center; background-color: white; color: #f59d23; ">
+        <b>新增商品</b>
+    </div>
+    
     @using (Html.BeginForm("Create", "Item", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
 
@@ -54,7 +50,7 @@
             @Html.TextAreaFor(model => model.NewData.Description, new { @class = "form-control_01", placeholder = "輸入小於500字的商品描述" })
             @Html.ValidationMessageFor(model => model.NewData.Description, null, new { @class = "label label-danger" })
         </div>
-        
+
         <!--繳交-->
         <div class="form-group" style="margin-top:50px;">
             <input class="btn_01" type="submit" value="上傳商品" />

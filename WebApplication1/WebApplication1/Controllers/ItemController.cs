@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication1.Models;
 using WebApplication1.Service;
 using WebApplication1.ViewModel;
 
@@ -89,6 +90,14 @@ namespace WebApplication1.Controllers
             
         }
         #endregion
+        #region 刪除商品
+        [Authorize(Roles ="Admin")]
+        public ActionResult Delete (int Id)
+        {
+            itemService.Delete(Id);
+            return RedirectToAction("Edit", "Item");
+        }
+        #endregion
         #region 商品類別
         public ActionResult CatalogItem(int Page = 1, int Catalog = 1)
         {
@@ -122,6 +131,15 @@ namespace WebApplication1.Controllers
 
         }
         #endregion
-        
+        #region 商品管理
+        [Authorize(Roles ="Admin")]
+        public ActionResult Edit()
+        {
+            ItemViewModel data = new ItemViewModel();
+            data.ItemList = itemService.GetAllItem();
+            return View(data);            
+        }
+        #endregion
+
     }
 }

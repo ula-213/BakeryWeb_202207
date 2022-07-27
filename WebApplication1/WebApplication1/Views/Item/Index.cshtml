@@ -6,16 +6,80 @@
 
 <div class="wrapper grid">
     @if (!Model.IdList.Count.Equals(0))
-    {      
+    {
         for (int i = 0; i < Model.IdList.Count; i++)
-        {              
-                @Html.Partial("ItemBlock", Model.ItemBlock[i])
-        }                    
+        {
+            @Html.Partial("ItemBlock", Model.ItemBlock[i])
+        }
     }
     else
     {
         <tr style="text-align:center;">暫無商品</tr>
     }
+
+    @*頁數
+    <div class="text-center">
+        <ul class="pagination">
+            <!--最前頁-->
+            <li class="first @(((Model.Paging.NowPage>1) ? "" : "disabled"))">
+                @Ajax.ActionLink("<<", "Index", new { Page = 1 },
+               new AjaxOptions
+               {
+                   UpdateTargetId = "ItemList",
+                   InsertionMode = InsertionMode.Replace
+               })
+            </li>
+            <!--上一頁-->
+            <li class="previous" @(((Model.Paging.NowPage > 1) ? "" : "disabled"))>
+                @Ajax.ActionLink("<", "Index", new { Page = Model.Paging.NowPage - 1 },
+               new AjaxOptions
+               {
+                   UpdateTargetId = "ItemList",
+                   InsertionMode = InsertionMode.Replace
+               })
+            </li>
+            @for (var page = (Model.Paging.NowPage - 6); page < (Model.Paging.NowPage + 6); page++)
+            {
+                if (page > 0 && (page <= Model.Paging.MaxPage))
+                {
+                    if (page == Model.Paging.NowPage)
+                    {
+                        <li class="active"><a href="#">@page</a></li>
+                    }
+                    else
+                    {
+                        <li>
+                            @Ajax.ActionLink(page.ToString(), "Index", new { Page = page },
+                            new AjaxOptions
+                                 {
+                                UpdateTargetId = "ItemList",
+                                InsertionMode = InsertionMode.Replace
+                            })
+                        </li>
+                    }
+                }
+            }
+            <!--下一頁-->
+            <li class="next @(((Model.Paging.NowPage<Model.Paging.MaxPage) ? "" : "disabled"))">
+                @Ajax.ActionLink(">", "Index", new { Page = Model.Paging.NowPage + 1 },
+               new AjaxOptions
+               {
+                   UpdateTargetId = "ItemList",
+                   InsertionMode = InsertionMode.Replace
+               })
+            </li>
+            <!--最後一頁-->
+            <li class="last @(((Model.Paging.NowPage < Model.Paging.MaxPage) ? "" : "disabled"))">
+                @Ajax.ActionLink(">>", "Index", new { Page = Model.Paging.MaxPage },
+               new AjaxOptions
+                    {
+                    UpdateTargetId = "ItemList",
+                    InsertionMode = InsertionMode.Replace
+               })
+            </li>
+        </ul>
+    </div>
+    *@
 </div>
 
 
