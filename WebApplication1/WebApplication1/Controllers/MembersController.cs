@@ -98,19 +98,12 @@ namespace WebApplication1.Controllers
             {
                 HttpContext.Session.Clear();
                 string Cart = cartService.GetCartSave(LoginMember.Account);
-                //登入後先取得先前購物車資料或新增購物車
+                //登入後先取得先前購物車資料
                 if (Cart != null)
                 {
                     HttpContext.Session["Cart"] = Cart;
                 }
-                else
-                {
-                    DateTime GetNowDateTimeDetail = new DateTime(0001, 01, 01, 01, 01, 01, 01);
-                    GetNowDateTimeDetail = DateTime.Now;
-                    string strTime = GetNowDateTimeDetail.ToString("yyyy-MM-dd hh:mm:ss.fff");
-
-                    HttpContext.Session["Cart"] = User.Identity.Name + strTime;
-                }
+               
 
                 string RoleDate = memberService.GetRole(LoginMember.Account);
                 

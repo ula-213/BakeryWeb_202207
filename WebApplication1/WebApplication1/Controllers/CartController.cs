@@ -32,6 +32,7 @@ namespace WebApplication1.Controllers
         [Authorize]
         public ActionResult Put(int Id, string ToPage, int qty)
         {
+            //將商品放入購物車時，若無購物車則建立新購物車
             if(HttpContext.Session["Cart"] == null)
             {
                 DateTime GetNowDateTimeDetail = new DateTime(0001, 01, 01, 01, 01, 01, 01);
@@ -137,7 +138,8 @@ namespace WebApplication1.Controllers
             string validteStr = cartService.GenerateOrder(order);
             if (validteStr == "訂單完成")
             {
-                
+                cartService.SetCartFinished(order.Order1.Account, order.Order1.Cart_Id);
+                HttpContext.Session.Clear();
                 return RedirectToAction("Index", "Item");
 
             }

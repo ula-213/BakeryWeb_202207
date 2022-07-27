@@ -6,44 +6,44 @@
 
 @using (Html.BeginForm())
 {
-<div class="form">
-    <div class="tab-group" style="font-size: 20px; text-align: center; background-color: white; color: #f59d23; ">
-        訂單
+    <div class="form">
+        <div class="tab-group" style="font-size: 20px; text-align: center; background-color: white; color: #f59d23; ">
+            訂單
+        </div>
+
+        @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            //收件人姓名
+            <div class="form-group">
+                @Html.LabelFor(model => model.Order1.Name, new { @class = "label_01" })
+                @Html.TextBoxFor(model => model.Order1.Name, new { @class = "form-control", placeholder = "輸入姓名" })
+                @Html.ValidationMessageFor(model => model.Order1.Name, null, new { @class = "label label-danger" })
+            </div>
+            //區號
+            <div class="form-group">
+                @Html.LabelFor(model => model.Order1.PostCode, new { @class = "label_01" })
+                @Html.TextBoxFor(model => model.Order1.PostCode, new { @class = "form-control", placeholder = "輸入區號" })
+                @Html.ValidationMessageFor(model => model.Order1.PostCode, null, new { @class = "label label-danger" })
+            </div>
+            //地址
+            <div class="form-group">
+                @Html.LabelFor(model => model.Order1.Adr, new { @class = "label_01" })
+                @Html.TextBoxFor(model => model.Order1.Adr, new { @class = "form-control", placeholder = "輸入收件地址" })
+                @Html.ValidationMessageFor(model => model.Order1.Adr, null, new { @class = "label label-danger" })
+            </div>
+            //付款方式
+            <div class="form-group"><span class="label_01"><b>付款方式：</b></span>貨到付款</div>
+
+            //應付金額
+            <div  class="form-group"><span class="label_01"><b>應付金額：</b></span>$@ViewData["Total"]</div>
+
+            //繳交
+            <div class="form-group" style="margin-top:50px;">
+                <input class="btn_01" type="submit" value="確認" />
+            </div>
+
+        }
     </div>
-
-    @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        //收件人姓名
-        <div class="form-group">
-            @Html.LabelFor(model => model.Order1.Name, new { @class = "label_01" })
-            @Html.TextBoxFor(model => model.Order1.Name, new { @class = "form-control", placeholder = "輸入姓名" })
-            @Html.ValidationMessageFor(model => model.Order1.Name, null, new { @class = "label label-danger" })
-        </div>
-        //區號
-        <span class="form-group">
-            @Html.LabelFor(model => model.Order1.PostCode, new { @class = "label_01" })
-            @Html.TextBoxFor(model => model.Order1.PostCode, new { @class = "form-control", placeholder = "輸入區號" })
-            @Html.ValidationMessageFor(model => model.Order1.PostCode, null, new { @class = "label label-danger" })
-        </span>
-        //地址
-        <span class="form-group">
-            @Html.LabelFor(model => model.Order1.Adr, new { @class = "label_01" })
-            @Html.TextBoxFor(model => model.Order1.Adr, new { @class = "form-control", placeholder = "輸入收件地址" })
-            @Html.ValidationMessageFor(model => model.Order1.Adr, null, new { @class = "label label-danger" })
-        </span>
-        //付款方式
-        <div class="label_01">付款方式：<span>貨到付款</span></div>
-
-        //應付金額
-        <div class="label_01">應付金額：<span>$@ViewData["Total"]</span></div>
-
-        //繳交
-        <div class="form-group" style="margin-top:50px;">
-            <input class="btn_01" type="submit" value="確認" />
-        </div>
-
-    }
-</div>
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

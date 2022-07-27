@@ -4,14 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<div class="page-header">
-    <h3>購物車</h3>
+<div class="page-header" style="color: #f59d23;">
+    <h3><span class="glyphicon glyphicon-shopping-cart"></span>購物車</h3>
 </div>
 <div class="table-responsive">
     <table class="table table-hover">
         @{
             int total_price = 0;
             int qty = 0;
+            int Total = 0;
         }
         @if (!Model.DataList.Equals(0))
         {
@@ -47,19 +48,39 @@
                     </td>
                 </tr>
             }
+            
             <tr>
                 <td></td>
-                <td class="text-right" style="font-size: 15px;"><b>總計：</b></td>
-                <td class="text-center" style="font-size: 15px;"><b>$@total_price</b></td>
-                <td class="text-center" style="font-size: 15px;"><b>@qty</b></td>
+                <td class="text-right" style="font-size: 15px; color: #f59d23;"><b>總計：</b></td>
+                <td class="text-center" style="font-size: 15px;">$@total_price</td>
+                <td class="text-center" style="font-size: 15px;">@qty</td>
                 <td></td>
             </tr>
+            if (total_price != 0)
+            {
+                <!--假設運費固定為50元-->
+                Total = total_price + 50;
+                <tr>
+                    <td style="border-top: none;"></td>
+                    <td class="text-right" style="font-size: 15px; color: #f59d23; border-top: none;"><b>運費：</b></td>
+                    <td class="text-center" style="font-size: 15px; border-top: none;">$50</td>
+                    <td style="border-top: none;"></td>
+                    <td style="border-top: none;"></td>
+                </tr>
+            }
             <tr>
                 <td style="border-top: none;"></td>
-                <td class="text-right" style="font-size: 15px; border-top: none;"><b>應付金額：</b></td>
-                <td class="text-center" style="font-size: 15px; border-top: none;"><b>$@total_price</b></td>
+                <td class="text-right" style="font-size: 15px; border-top: none; color: #f59d23;"><b>應付金額：</b></td>
+                <td class="text-center" style="font-size: 15px; border-top: none;"><b>$@Total</b></td>
                 <td style="border-top: none;"></td>
-                <td class="text-center" style="border-top: none;">@Html.ActionLink("結帳", "Checkout", "Cart", new { Total = total_price }, new { @class = "btn btn-warning" }) </td>
+                @if (total_price != 0)
+                {
+                    <td class="text-center" style="border-top: none;">@Html.ActionLink("結帳", "Checkout", "Cart", new { Total = Total }, new { @class = "btn btn-warning" }) </td>
+                }
+                else
+                {
+                    <td style="border-top: none;"></td>
+                }
             </tr>
         }
         else
