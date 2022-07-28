@@ -9,7 +9,10 @@ namespace WebApplication1.Models
 {
     public class Order
     {
+        [DisplayName("日期")]
+        public string Time { get; set; }
         public string Account { get; set; }
+        [DisplayName("訂單編號")]
         public string Cart_Id { get; set; }
         [DisplayName("收件人姓名")]
         [Required(ErrorMessage ="請輸入收件人姓名")]
@@ -23,5 +26,6 @@ namespace WebApplication1.Models
         [Required(ErrorMessage ="請輸入郵遞區號")]
         [Range(typeof(int), "100", "99999", ErrorMessage ="請輸入正確郵遞區號")]
         public int PostCode { get; set; }
+
     }
 }

@@ -135,9 +135,14 @@ namespace WebApplication1.Controllers
         {
             order.Order1.Account = User.Identity.Name;
             order.Order1.Cart_Id = HttpContext.Session["Cart"].ToString();
-            string validteStr = cartService.GenerateOrder(order);
+
+            DateTime GetNowDateTimeDetail = new DateTime(0001, 01, 01);
+            GetNowDateTimeDetail = DateTime.Now;
+            string strTime = GetNowDateTimeDetail.ToString("yyyy-MM-dd");
+
+            string validteStr = cartService.GenerateOrder(order, strTime);
             if (validteStr == "訂單完成")
-            {
+            {              
                 cartService.SetCartFinished(order.Order1.Account, order.Order1.Cart_Id);
                 HttpContext.Session.Clear();
                 return RedirectToAction("Index", "Item");

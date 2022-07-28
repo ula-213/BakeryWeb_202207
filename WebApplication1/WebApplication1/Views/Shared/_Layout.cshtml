@@ -42,10 +42,12 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a href="#">會員資料</a></li>
                                 <li><a href="@Url.Action("ChangePassword", "Members")">修改密碼</a></li>
-                                @if (User.IsInRole("Admin")) {
+                                @if (User.IsInRole("Admin"))
+                                {
                                     <li><a href="@Url.Action("Edit", "Item")">商品管理</a></li>
+                                    <li><a href="@Url.Action("GetLastest50Order", "Order")">訂單查詢</a></li>
                                 }
-                                
+
                                 <li role="separator" class="divider"></li>
                                 <li><a href="@Url.Action("Logout", "Members")">登出</a></li>
 

@@ -129,6 +129,7 @@
     <Compile Include="Controllers\ImgCarouselController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -138,6 +139,7 @@
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Members.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\JwtObject.cs" />
     <Compile Include="Security\JwtService.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="Service\ItemService.cs" />
     <Compile Include="Service\MailService.cs" />
     <Compile Include="Service\MembersDBService.cs" />
+    <Compile Include="Service\OrderService.cs" />
     <Compile Include="ViewModel\CartBuyViewModel.cs" />
     <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\ImgCarouselViewModel.cs" />
@@ -154,6 +157,7 @@
     <Compile Include="ViewModel\ItemDetailViewModel.cs" />
     <Compile Include="ViewModel\ItemViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\OrderViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +212,8 @@
     <Content Include="Views\Item\CatalogItem.cshtml" />
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Item\Edit.cshtml" />
+    <Content Include="Views\Order\GetLastest50Order.cshtml" />
+    <Content Include="Views\Order\GetOrderItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

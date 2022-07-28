@@ -1,0 +1,57 @@
+﻿@model WebApplication1.ViewModel.OrderViewModel
+
+@{
+    ViewBag.Title = "GetLastest50Order";
+}
+<div class="page-header text-center" style="color: #f59d23;">
+    <h3>訂單資訊</h3>
+</div>
+<div class="table-responsive">
+    <table class="table table-hover">
+
+        @if (!Model.orderList.Equals(0))
+        {
+            
+
+            <thead>
+                <tr>
+                    <th class="text-center">@Html.DisplayNameFor(p => p.orderList[0].Time)</th>
+                    <th class="text-center">@Html.DisplayNameFor(p => p.orderList[0].Cart_Id)</th>
+                    <th class="text-center">@Html.DisplayNameFor(p => p.orderList[0].Name)</th>
+                    <th class="text-center">@Html.DisplayNameFor(p => p.orderList[0].Adr)</th>
+                    <th class="text-center">購買</th>
+                    <th class="text-center">狀態</th>
+                </tr>
+            </thead>
+            foreach (var item in Model.orderList)
+            {
+                <tr>
+                    <td class="text-center">@item.Time</td>
+                    <td class="text-center">@item.Cart_Id</td>
+                    <td class="text-center">@item.Name</td>
+                    <td class="text-center">
+                        (@item.PostCode) @item.Adr
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink(" ", "GetOrderItem", "Order", new { Account = item.Account, Cart_Id = item.Cart_Id}, new { @class = "glyphicon glyphicon-search" })
+                        @*<button class="glyphicon glyphicon-search" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></button>*@
+                    </td>
+                    <td class="text-center"></td>
+                </tr>
+            }
+
+
+        }
+        else
+        {
+            <tr>
+                <td>無訂單資料</td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

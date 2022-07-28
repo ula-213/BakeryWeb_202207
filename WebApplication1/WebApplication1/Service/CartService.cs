@@ -236,9 +236,9 @@ namespace WebApplication1.Service
         }
         #endregion
         #region 產生訂單
-        public string GenerateOrder(CartBuyViewModel Order)
+        public string GenerateOrder(CartBuyViewModel Order, string Time)
         {
-            string sql = $@"INSERT INTO Order1(Account, Cart_Id, Adr, PostCode, Name) VALUES ('{Order.Order1.Account}', '{Order.Order1.Cart_Id}', '{Order.Order1.Adr}', {Order.Order1.PostCode}, '{Order.Order1.Name}')";
+            string sql = $@"INSERT INTO Order1(Account, Cart_Id, Adr, PostCode, Name, Time) VALUES ('{Order.Order1.Account}', '{Order.Order1.Cart_Id}', '{Order.Order1.Adr}', {Order.Order1.PostCode}, '{Order.Order1.Name}', '{Time}')";
             try
             {
                 conn.Open();
