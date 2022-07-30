@@ -31,6 +31,7 @@ namespace WebApplication1.Service
                 Data.Image = dr["Image"].ToString();
                 Data.Price = Convert.ToInt32(dr["Price"]);
                 Data.Description = dr["Description"].ToString();
+                Data.Catalog = Convert.ToInt32(dr["Catalog"]);
                 Data.Unit = dr["Unit"].ToString();
             }
             catch (Exception e)
@@ -190,6 +191,28 @@ namespace WebApplication1.Service
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql.ToString(), conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        #endregion
+        #region 修改商品資料
+        public void ModifyItem(Item data)
+        {
+            string sql = $@"update Product set Name='{data.Name}', Price = {data.Price},
+                            Description = '{data.Description}', Catalog = {data.Catalog}, Unit = '{data.Unit}' where Id = {data.Id}";
+
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
             }
             catch(Exception e)

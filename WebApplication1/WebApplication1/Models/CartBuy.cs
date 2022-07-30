@@ -15,7 +15,7 @@ namespace WebApplication1.Models
         public int Item_Id { get; set; }
         //單一商品購買數量
         [DisplayName("數量")]
-        [Range(1, 99, ErrorMessage ="數量需介於1-99")]
+        [Range(1, 99, ErrorMessage = "數量需介於1-99")]
         public int Quantity { get; set; }
         //item資料表
         public Item Item { get; set; } = new Item();
