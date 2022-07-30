@@ -259,3 +259,8 @@ E:\BakeryWeb_202207\WebApplication1\WebApplication1\obj\Debug\WebApplication1.cs
 E:\BakeryWeb_202207\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csproj.CopyComplete
 E:\BakeryWeb_202207\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
 E:\BakeryWeb_202207\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+E:\BakeryWeb_202207\WebApplication1\WebApplication1\bin\EntityFramework.dll
+E:\BakeryWeb_202207\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.dll
+E:\BakeryWeb_202207\WebApplication1\WebApplication1\bin\EntityFramework.xml
+E:\BakeryWeb_202207\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.xml
+E:\BakeryWeb_202207\WebApplication1\WebApplication1\bin\zh-Hant\EntityFramework.resources.dll

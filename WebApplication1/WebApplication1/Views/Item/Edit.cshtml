@@ -36,7 +36,7 @@
                     <td class="text-center">@item.Name</td>
                     <td class="text-center">@item.Price</td>
                     <td class="text-center">
-                        @Html.ActionLink("修改", "Delete", new { Id = item.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("修改", "ModifyItem", new { Id = item.Id }, new { @class = "btn btn-primary" })
                         @Html.ActionLink("刪除", "Delete", new { Id = item.Id }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>

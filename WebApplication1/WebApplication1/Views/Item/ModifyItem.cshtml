@@ -1,0 +1,72 @@
+﻿@model WebApplication1.Models.Item
+
+@{
+    ViewBag.Title = "ModifyItem";
+}
+
+
+@using (Html.BeginForm())
+{
+    
+    <div class="form">
+        <div class="tab-group" style="font-size: 20px; text-align: center; background-color: white; color: #f59d23; ">
+            <b>修改商品資料</b>
+        </div>
+        <hr />
+        <!--商品名稱-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "label_01" })
+
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+        </div>
+        <!--價格-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "label_01" })
+
+            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+
+        </div>
+        <!--商品單位-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "label_01" })
+
+            @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
+
+        </div>
+        <!--類別-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Catalog, htmlAttributes: new { @class = "label_01" })
+            @Html.DropDownListFor(model => model.Catalog, (IEnumerable<SelectListItem>)ViewBag.selectList, new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => model.Catalog, "", new { @class = "text-danger" })
+
+        </div>
+        <!--圖片-->
+        @*
+            <div class="form-group">
+                @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "label_01" })
+                @Html.TextBoxFor(model => model.Image, new { @class = "form-control", type = "file" })
+                <div style="color:red">*圖檔大小為620*460</div>
+                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+            </div>
+        *@
+        <!--描述-->
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "label_01" })
+
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control_01" } )
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+        </div>
+
+        <!--繳交-->
+        <div class="form-group">
+            <input class="btn_01" style="margin-top: 50px;" type="submit" value="確認修改" />
+        </div>
+    </div>
+        }
+

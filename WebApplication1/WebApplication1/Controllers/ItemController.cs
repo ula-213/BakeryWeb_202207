@@ -98,6 +98,40 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Edit", "Item");
         }
         #endregion
+        #region 修改商品資料
+        [Authorize(Roles ="Admin")]
+        public ActionResult ModifyItem(int Id)
+        {            
+            Item data = itemService.GetDataById(Id);
+
+            var productCatalogDropdownList = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="麵包系列", Value="1"},
+                new SelectListItem() { Text = "蛋糕系列", Value="2"},
+                new SelectListItem() {Text="餅乾系列", Value="3"}
+            };
+            if(data.Catalog == 1)
+            {
+                productCatalogDropdownList.Where(q => q.Value == "1").First().Selected = true;
+            }
+            else if(data.Catalog == 2) 
+            {
+                productCatalogDropdownList.Where(q => q.Value == "2").First().Selected = true;
+            }
+            else if (data.Catalog == 3)
+            {
+                productCatalogDropdownList.Where(q => q.Value == "3").First().Selected = true;
+            }
+            ViewBag.selectList = productCatalogDropdownList;
+            return View(data);
+        }
+        [HttpPost]
+        public ActionResult ModifyItem(Item data)
+        {
+            itemService.ModifyItem(data);
+            return RedirectToAction("Edit", "Item");
+        }
+        #endregion
         #region 商品類別
         public ActionResult CatalogItem(int Page = 1, int Catalog = 1)
         {
